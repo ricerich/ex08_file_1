@@ -36,14 +36,19 @@ public class MainActivity extends AppCompatActivity
         int cMonth = cal1.get(Calendar.MONTH);
         int cDay = cal1.get(Calendar.DAY_OF_MONTH);
 
-        dp.init(cYear, cMonth, cDay, new DatePicker.OnDateChangedListener() {
+        //실행과 동시에 일기 로드(readDiary메소드 호출)
+        filename1 = cYear+ "_" + cMonth + "_" + cDay + ".txt";
+        String str2 = readDiary(filename1);
+        edtDiary.setText(str2);
+        btnWrite.setEnabled(true);
+
+       dp.init(cYear, cMonth, cDay, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int day)
             {
                 //선택날짜로 파일명을 만든다. 예) 2021_12_22.txt
                 filename1 = year+ "_" + month + "_" + day + ".txt";
                 String str1 = readDiary(filename1);
-
                 edtDiary.setText(str1);
                 btnWrite.setEnabled(true);
 
